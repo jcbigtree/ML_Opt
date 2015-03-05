@@ -12,12 +12,14 @@ namespace EC
 	class BaseFitnessFunctor
 	{
 	public:
-		BaseFitnessFunctor(){}
-		virtual ~BaseFitnessFunctor(){}
+		BaseFitnessFunctor()
+		{ }
+		virtual ~BaseFitnessFunctor()
+		{ }
 
-		/// \brief     Calculate fitness of an individual. For single-objective optimization only.
-		/// \param[in] BaseIndividual<ChromoType, FitnessType>&. A reference to an individual
-		virtual double operator() (BaseIndividual<ChromoType, FitnessType>* pIndividual) = 0;
+		/// \brief Calculate fitness of an individual. For single-objective optimization only.
+		/// \param[in] pIndiv. An individual that will be evaluated
+		virtual double operator() (BaseIndividual<ChromoType, FitnessType>* pIndiv) = 0;
 	};
 }
 #endif
