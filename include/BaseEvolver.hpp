@@ -28,11 +28,12 @@ namespace EC
 		virtual ~BaseEvolver();
 	
 
-		/// \brief       A pure virtual method for initializing the population randomly.
-		///				 WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
-		/// \param[in]   populationSize. Size of a population.
-		/// \param[in]   lowerBound. Domain lower bound.
-		/// \param[in]   upperBound. Domain upper bound.
+		/// \brief Create and initialize a population randomly.
+		///            WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
+		/// \param[in] populationSize. Size of a population
+		/// \param[in] lowerBound. Domain lower bound
+		/// \param[in] upperBound. Domain upper bound
+		/// \param[in] pFitnessFunc. Functor for fitness evaluation
 		virtual void Initialize(
 			unsigned int populationSize,
 			std::vector<double>& lowerBound,
@@ -40,12 +41,17 @@ namespace EC
 			BaseFitnessFunctor<ChromoType, FitnessType>* pFitnessFunc
 			);
 
-
-		/// \brief       Evolve. The main loop.
+		/// \brief Evolve. The main loop
+		/// \param[in] maxGeneration. Max generation allowed
+		/// \param[in] verbose. If true, show details during evolving
 		virtual void Evolve(unsigned int maxGeneration=100, bool verbose=false);
 
-
-		/// \brief       Evolve. The main loop.
+		/// \brief Evolve. The main loop
+		/// \param[in] maxGeneration. Max generation allowed
+		/// \param[in] lowerBound. Domain lower bound
+		/// \param[in] upperBound. Domain upper bound
+		/// \param[in] pFitnessFunc. Functor for fitness evaluation
+		/// \param[in] verbose. If true, show details during evolving
 		virtual void Evolve(
 			unsigned int populationSize,
 			std::vector<double>& lowerBound,
@@ -54,45 +60,44 @@ namespace EC
 			unsigned int maxGeneration=100,
 			bool verbose=false);
 		
-
-		/// \brief       Set the population that will be evolved.
-		/// \param[in]   A population pointer
+		/// \brief Set the population that will be evolved.
+		/// \param[in] pop. A pointer to an existing population
 		void SetPopulation(BasePopulation<ChromoType, FitnessType>* pop);
 
-		/// \brief       Get the population that will be evolved.
-		/// \return      A population pointer
+		/// \brief Get a pointer to the population that will be evolved.
+		/// \return The pointer to the population stored in the BaseEvolver
 		BasePopulation<ChromoType, FitnessType>* GetPopulation();
 
 	protected:
-		/// \brief         Evaluate a population.
-		/// \param[in,out] An individual
+		/// \brief Evaluate an individual
+		/// \param[in,out] An individual. Fitness will be stored in the input individual
 		virtual void Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv);
 
-		/// \brief         Evaluate an individual.
-		/// \param[in,out] A population
+		/// \brief Evaluate a population
+		/// \param[in,out] A population. Fitness will be stored in each individual
 		virtual void Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation);
 
-		/// \brief       Select the better ones from the current population.
+		/// \brief Select the better ones from the current population.
 		virtual void Select() = 0;
 
-		/// \brief       Generate a new population using the selected individuals.
+		/// \brief Generate a new population using the selected individuals.
 		virtual void Breed() = 0;
 
-		/// \brief       Check whether the stop criteria is met.
+		/// \brief Check whether the stop criteria is met.
 		virtual bool CheckStopCriteria() = 0;
 
-		/// \brief       Save the elite
+		/// \brief Save the elite
 		virtual void SaveElite() = 0;
 		
-		/// \brief       Generate a number from a given uniform distribution
-		/// \param[in]   const double. min
-		/// \param[in]   const double. max
+		/// \brief       Generate a number from a given uniform distribution [min, max]
+		/// \param[in]   min. Lower bound of a uniform distribution
+		/// \param[in]   max. Upper bound of a uniform distribution
 		/// \return      The generated number
 		double RandUniform(const double min, const double max);
 
-		/// \brief       Generate a number from a given normal distribution
-		/// \param[in]   const double. mean
-		/// \param[in]   const double. std
+		/// \brief       Generate a number from a given normal distribution (mean, std)
+		/// \param[in]   mean. Mean of a normal distribution
+		/// \param[in]   std. Std of a normal distribution
 		/// \return      The generated number
 		double RandNorm(const double mean, const double std);
 
@@ -101,7 +106,7 @@ namespace EC
 		BasePopulation<ChromoType, FitnessType>* m_pOffsprings;	
 
 		unsigned int  m_generation;		    // Generation 
-		unsigned int  m_maxGeneration;	    // Max generation that is allowed 
+		unsigned int  m_maxGeneration;	    // Max generation allowed
 
 		std::vector<double> m_lowerBound;   // Lower bound of the variables
 		std::vector<double> m_upperBound;   // Upper bound of the variables
@@ -162,8 +167,10 @@ namespace EC
 
 
 	template<typename ChromoType, typename FitnessType>
-	void BaseEvolver<ChromoType, FitnessType>::Initialize(unsigned int populationSize,
-		std::vector<double>& lowerBound, std::vector<double>& upperBound,
+	void BaseEvolver<ChromoType, FitnessType>::Initialize(
+		unsigned int populationSize,
+		std::vector<double>& lowerBound,
+		std::vector<double>& upperBound,
 		BaseFitnessFunctor<ChromoType, FitnessType>* pFitnessFunc)
 	{
 		// Check the given bounds
@@ -190,7 +197,8 @@ namespace EC
 	
 
 	template<typename ChromoType, typename FitnessType>
-	void BaseEvolver<ChromoType, FitnessType>::Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv)
+	void BaseEvolver<ChromoType, FitnessType>::
+	Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv)
 	{
 		// Check whether we have fitness function
 		if (m_pFitnessFunc == NULL)
@@ -202,7 +210,8 @@ namespace EC
 	}
 
 	template<typename ChromoType, typename FitnessType>
-	void BaseEvolver<ChromoType, FitnessType>::Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation)
+	void BaseEvolver<ChromoType, FitnessType>::
+	Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation)
 	{
 		// Check whether we have fitness function
 		unsigned int popSize = pPopulation->Size();
@@ -223,9 +232,6 @@ namespace EC
 
 			// Generate offsprings 
 			Breed();
-
-			// Evaluate the offsprings			
-			//Evaluate(m_pOffsprings);
 
 			// Select some of them and form the new generation.
 			Select();
