@@ -21,7 +21,7 @@ namespace EC
 		
 	protected:
 		/// \brief Create and initialize a population randomly. Overridden.
-		///				 WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
+		///	       WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
 		/// \param[in] populationSize. Size of a population.
 		/// \param[in] lowerBound. Domain lower bound.
 		/// \param[in] upperBound. Domain upper bound.
