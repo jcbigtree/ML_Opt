@@ -8,47 +8,45 @@
 
 namespace EC
 {
-
+	/// \brief Real coded individual
 	class RealCodedIndividual : public BaseIndividual<double, double>
 	{
 	public:
 		RealCodedIndividual();
 
-		/// \brief     Constructor with length
-		/// \param[in] Length of an individual
+		/// \brief Constructor with length
+		/// \param[in] length. Length of an individual
 		RealCodedIndividual(unsigned int length);
-
-
 		virtual ~RealCodedIndividual();
 		
-		/// \brief     Overloaded subscript. Note that the return value can be a left-value.
-		/// \param[in] Index
-		/// \return    The corresponding gene.
+		/// \brief Overloaded subscript. Note that the return value can be a left-value.
+		/// \param[in] index.
+		/// \return The corresponding gene.
 		virtual double& operator[](const int index);
 				
-		/// \brief  Get the length of this individual
+		/// \brief Get the length of this individual
 		/// \return Length of the individual(chromosome).
 		inline virtual int Size() const
 		{
 			return m_chromosome.size();
 		}
 	
-		/// \brief  Get the fitness of this individual
+		/// \brief Get the fitness of this individual
 		/// \return Fitness
 		inline virtual double GetFitness() const
 		{
 			return m_fitness;		
 		}
 	
-		/// \brief     Set the fitness of this individual
-		/// \param[in] Fitness
+		/// \brief Set the fitness of this individual
+		/// \param[in] fitness. Fitness
 		inline virtual void SetFitness(double fitness)
 		{
 			m_fitness = fitness;
 		}
 
-		/// \brief  Create a deepcopy of this individual
-		/// \return BaseIndividual.
+		/// \brief Create a deepcopy of this individual
+		/// \return A deepcopy
 		virtual BaseIndividual<double, double>* DeepCopy();
 			
 		/// \brief Print the individual to console

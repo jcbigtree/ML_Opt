@@ -8,12 +8,15 @@
 
 namespace EC
 {
+	/// \brief Differential evolution which is a kind of evolution algorithms.
 	class DifferentialEvolution : public BaseEvolver<double, double>
 	{
 	public:
 		DifferentialEvolution();
 		virtual ~DifferentialEvolution();
 
+		/// \brief Get the best individual
+		/// \return the best individual
 		BaseIndividual<double, double>* GetElite();	
 		
 	protected:
@@ -44,6 +47,9 @@ namespace EC
 
 	public:
 		/// \brief Generate a few random integers without replacement
+		/// \param[in] min. Lower bound
+		/// \param[in] max. Upper bound
+		/// \param[in] numInteger. How many random integers will be generated
 		virtual int* RandIntegerWithoutReplacement(
 			unsigned int min, 
 			unsigned int max, 
@@ -56,7 +62,6 @@ namespace EC
 
 		double m_diffWeight;    // Differential weights [0, 2]
 		double m_crossoverProb; // Crossover probability
-		
 	};
 }
 
