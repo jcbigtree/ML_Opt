@@ -31,6 +31,22 @@ double& RealCodedIndividual::operator[](const int index)
 	}
 	return m_chromosome[index];
 }
+
+
+
+// Note that when speed is crutial, we may use other ways to 
+// implement this function.
+BaseIndividual<double, double>* RealCodedIndividual::DeepCopy()
+{
+	unsigned int length = m_chromosome.size();
+	RealCodedIndividual* deepCopy = new RealCodedIndividual(length);
+	for (size_t i = 0; i < length; i++)
+	{
+		(*deepCopy)[i] = m_chromosome[i];
+	}
+	deepCopy->SetFitness(m_fitness);	
+	return deepCopy;
+}
 			
 
 void RealCodedIndividual::Print()

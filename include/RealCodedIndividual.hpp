@@ -46,6 +46,10 @@ namespace EC
 		{
 			m_fitness = fitness;
 		}
+
+		/// \brief  Create a deepcopy of this individual
+		/// \return BaseIndividual.
+		virtual BaseIndividual<double, double>* DeepCopy();
 			
 		/// \brief Print the individual to console
 		void Print();

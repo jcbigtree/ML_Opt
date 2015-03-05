@@ -32,6 +32,10 @@ namespace EC
 		/// \brief     Set the fitness of this individual
 		/// \param[in] Fitness
 		virtual void SetFitness(FitnessType fitness) = 0;	
+
+		/// \brief Create a deepcopy of this individual
+		/// \return BaseIndividual<double, double>
+		virtual BaseIndividual<ChromoType, FitnessType>* DeepCopy() = 0;
 	};
 }
 
