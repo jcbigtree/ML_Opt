@@ -115,7 +115,7 @@ namespace EC
 		BaseFitnessFunctor<ChromoType, FitnessType>* m_pFitnessFunc;
 
 	private:
-		// Generate random numbers 
+		// Random number generator
 		std::random_device          m_randDevice;
 		std::default_random_engine  m_RandNumberGenerator; 	
 	
@@ -214,7 +214,6 @@ namespace EC
 	void BaseEvolver<ChromoType, FitnessType>::
 	Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation)
 	{
-		// Check whether we have fitness function
 		unsigned int popSize = pPopulation->Size();
 		for (unsigned int i = 0; i < popSize; i++)
 		{
@@ -229,15 +228,17 @@ namespace EC
 		Evaluate(m_pPopulation);
 		while(CheckStopCriteria() == false)
 		{
-			if (verbose){ std::cout << "Generation: " << m_generation << std::endl;	}			
+			if (verbose)
+			{
+				std::cout << "Generation: " << m_generation << std::endl;
+			}
 
-			// Generate offsprings 
-			Breed();
+			Breed();     // Generate offsprings
 
-			// Select some of them and form the new generation.
-			Select();
+			Select();    // Select better ones
 
-			SaveElite();
+			SaveElite(); // Save the best one
+
 			m_generation++;
 		}
 	}
