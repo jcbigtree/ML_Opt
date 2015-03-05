@@ -21,11 +21,11 @@ int main(void)
 		true
 		);
 
-	BaseIndividual<double, double>* pIndivElite = myDE.GetElite();
+	RealCodedIndividual* pIndivElite = dynamic_cast<RealCodedIndividual*>(myDE.GetElite());
 
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	std::cout << "Best individual: " << std::endl;
-	dynamic_cast<RealCodedIndividual*>(pIndivElite)->Print();
+	pIndivElite->Print();
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	std::cout << "Best fitness: " << pIndivElite->GetFitness() << std::endl;
 	std::cout << "------------------------------------------------------------------------" << std::endl;
