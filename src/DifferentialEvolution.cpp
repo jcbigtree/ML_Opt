@@ -14,12 +14,12 @@ EC::DifferentialEvolution::DifferentialEvolution()
 EC::DifferentialEvolution::~DifferentialEvolution()
 { }
 
-/// \brief       Create and initialize a population randomly. Overridden.
+/// \brief Create and initialize a population randomly. Overridden.
 ///				 WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
-/// \param[in]   populationSize. Size of a population.
-/// \param[in]   lowerBound. Domain lower bound.
-/// \param[in]   upperBound. Domain upper bound.
-/// \param[in]   pFitnessFunc. Functor for fitness evaluation.
+/// \param[in] populationSize. Size of a population.
+/// \param[in] lowerBound. Domain lower bound.
+/// \param[in] upperBound. Domain upper bound.
+/// \param[in] pFitnessFunc. Functor for fitness evaluation.
 void EC::DifferentialEvolution::Initialize(
 	unsigned int populationSize,
 	std::vector<double>& lowerBound,
