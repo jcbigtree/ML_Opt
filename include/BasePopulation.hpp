@@ -27,7 +27,7 @@ namespace EC
 		/// \return A reference to the pointer of the corresponding individual.
 		inline BaseIndividual<ChromoType, FitnessType>*& operator[](unsigned int index)
 		{
-			if (index < 0 || index > m_population.size())
+			if (index < 0 || index > m_population.size() - 1)
 			{
 				throw std::out_of_range("Index out of bound");
 			}
