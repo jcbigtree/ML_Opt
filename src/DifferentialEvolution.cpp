@@ -1,6 +1,6 @@
-#include "DifferentialEvolution.hpp"
-#include "BasePopulation.hpp"
-#include "RealCodedIndividual.hpp"
+#include "../include/DifferentialEvolution.hpp"
+#include "../include/BasePopulation.hpp"
+#include "../include/RealCodedIndividual.hpp"
 #include <iostream>
 #include <math.h>
 
@@ -27,7 +27,7 @@ void EC::DifferentialEvolution::Initialize(unsigned int populationSize, std::vec
 	BaseEvolver<double, double>::Initialize(populationSize, lowerBound, upperBound, pFitnessFunc);
 	
 	// Create and initialize population
-	int problemDim = lowerBound.size();
+	unsigned int problemDim = lowerBound.size();
 	m_pPopulation = new BasePopulation<double, double>(populationSize);
 	for(unsigned int i=0; i<populationSize; i++)
 	{		
@@ -64,8 +64,8 @@ void EC::DifferentialEvolution::Breed()
 	}
 
 	// Crossover 
-	int popSize = m_pPopulation->Size();	
-	int indivLength = (*m_pPopulation)[0]->Size();
+	unsigned int popSize = m_pPopulation->Size();
+	unsigned int indivLength = (*m_pPopulation)[0]->Size();
 
 	for (unsigned int i = 0; i < popSize; i++)
 	{

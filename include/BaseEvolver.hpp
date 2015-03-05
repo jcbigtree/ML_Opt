@@ -42,7 +42,7 @@ namespace EC
 
 
 		/// \brief       Evolve. The main loop.
-		virtual void Evolve(int maxGeneration=100, bool verbose=false);
+		virtual void Evolve(unsigned int maxGeneration=100, bool verbose=false);
 
 
 		/// \brief       Evolve. The main loop.
@@ -51,7 +51,7 @@ namespace EC
 			std::vector<double>& lowerBound,
 			std::vector<double>& upperBound,
 			BaseFitnessFunctor<ChromoType, FitnessType>* pFitnessFunc,
-			int maxGeneration=100,
+			unsigned int maxGeneration=100,
 			bool verbose=false);
 		
 
@@ -213,7 +213,7 @@ namespace EC
 	}
 
 	template<typename ChromoType, typename FitnessType>
-	void BaseEvolver<ChromoType, FitnessType>::Evolve(int maxGeneration, bool verbose)
+	void BaseEvolver<ChromoType, FitnessType>::Evolve(unsigned int maxGeneration, bool verbose)
 	{
 		m_maxGeneration = maxGeneration;
 		Evaluate(m_pPopulation);
@@ -242,7 +242,7 @@ namespace EC
 		std::vector<double>& lowerBound, 
 		std::vector<double>& upperBound,
 		BaseFitnessFunctor<ChromoType, FitnessType>* pFitnessFunc,
-		int maxGeneration,
+		unsigned int maxGeneration,
 		bool verbose)
 	{
 		Initialize(populationSize, lowerBound, upperBound, pFitnessFunc);

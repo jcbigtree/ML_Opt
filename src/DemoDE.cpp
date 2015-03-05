@@ -1,10 +1,10 @@
 
 #include <iostream>
 #include <vector>
-#include "RealCodedIndividual.hpp"
-#include "BasePopulation.hpp"
-#include "DifferentialEvolution.hpp"
-#include "BenchmarkFunctions.hpp"
+#include "../include/RealCodedIndividual.hpp"
+#include "../include/BasePopulation.hpp"
+#include "../include/DifferentialEvolution.hpp"
+#include "../include/BenchmarkFunctions.hpp"
 
 using namespace EC;
 

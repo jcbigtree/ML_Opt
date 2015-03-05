@@ -1,4 +1,4 @@
-#include "RealCodedIndividual.hpp"
+#include "../include/RealCodedIndividual.hpp"
 #include <iostream>
 
 using namespace EC;

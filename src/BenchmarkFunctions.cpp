@@ -1,6 +1,5 @@
-#include "BenchmarkFunctions.hpp"
-
-
+#include "../include/BenchmarkFunctions.hpp"
+#include <stdexcept>
 
 
 EC::SphereFunctor::SphereFunctor() : m_problemDim(10)
