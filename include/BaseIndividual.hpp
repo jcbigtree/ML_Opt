@@ -16,25 +16,25 @@ namespace EC
 		BaseIndividual();
 		virtual ~BaseIndividual();
 		
-		/// \brief     Overloaded subscript. Note that the return value can be a left-value.
-		/// \param[in] Index
-		/// \return    The corresponding gene.
+		/// \brief Overloaded subscript. Note that the return value can be a left-value.
+		/// \param[in] index. Index of a particular gene
+		/// \return The corresponding gene.
 		virtual ChromoType& operator[](const int index) = 0;
 			
-		/// \brief  Get the length of this individual
+		/// \brief Get the length of this individual
 		/// \return Length of the individual(chromosome).
 		virtual int Size() const = 0;
 
-		/// \brief  Get the fitness of this individual
+		/// \brief Get the fitness of this individual
 		/// \return Fitness
 		virtual FitnessType GetFitness() const = 0;
 
-		/// \brief     Set the fitness of this individual
-		/// \param[in] Fitness
+		/// \brief Set the fitness of this individual
+		/// \param[in] fitness. Fitness
 		virtual void SetFitness(FitnessType fitness) = 0;	
 
 		/// \brief Create a deepcopy of this individual
-		/// \return BaseIndividual<double, double>
+		/// \return A pointer to a deepcopy of this individual
 		virtual BaseIndividual<ChromoType, FitnessType>* DeepCopy() = 0;
 	};
 }

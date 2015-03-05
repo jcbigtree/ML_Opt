@@ -17,15 +17,14 @@ namespace EC
 	{
 	public:         
 		BasePopulation();
-		/// \brief     Constructor
-		/// \param[in] Size of the population
+		/// \brief Constructor
+		/// \param[in] size. Desired population size
 		BasePopulation(unsigned int size);
-		
 		virtual ~BasePopulation();
 		
-		/// \brief     Overloaded subscript operator
-		/// \param[in] Index
-		/// \return    A reference to the pointer of the corresponding individual.
+		/// \brief Overloaded subscript operator
+		/// \param[in] index. Index of a particular individual
+		/// \return A reference to the pointer of the corresponding individual.
 		inline BaseIndividual<ChromoType, FitnessType>*& operator[](unsigned int index)
 		{
 			if (index < 0 || index > m_population.size())
@@ -35,7 +34,7 @@ namespace EC
 			return m_population[index];
 		}
 			
-		/// \brief  Get size of the population
+		/// \brief Get size of the population
 		/// \return Size of the population
 		inline unsigned int Size() const
 		{
