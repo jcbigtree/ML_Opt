@@ -30,20 +30,32 @@ namespace EC
 			BaseFitnessFunctor<double, double>* pFitnessFunc
 			);
 
-		/// \brief       Select the better ones from the current population.
+		/// \brief Select the better ones from the current population.
 		virtual void Select();
 
-		/// \brief       Generate a new population using the selected individuals.
+		/// \brief Generate a new population using the selected individuals.
 		virtual void Breed();
 
-		/// \brief       Check whether the stop criteria is met.
+		/// \brief Check whether the stop criteria is met.
 		virtual bool CheckStopCriteria();
 
-
+		/// \brief Save elite
 		virtual void SaveElite();
+
+	public:
+		/// \brief Generate a few random integers without replacement
+		virtual int* RandIntegerWithoutReplacement(
+			unsigned int min, 
+			unsigned int max, 
+			unsigned int numInteger
+			);
+
 
 	private:
 		BaseIndividual<double, double>* m_pElite;
+
+		double m_diffWeight;    // Differential weights [0, 2]
+		double m_crossoverProb; // Crossover probability
 		
 	};
 }
