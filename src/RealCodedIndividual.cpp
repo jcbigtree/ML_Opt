@@ -8,8 +8,6 @@ RealCodedIndividual::RealCodedIndividual()
 { }
 
 
-/// \brief     Constructor with length
-/// \param[in] Length of an individual
 RealCodedIndividual::RealCodedIndividual(unsigned int length)
 {
 	m_chromosome.resize(length);

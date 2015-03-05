@@ -14,14 +14,17 @@ EC::DifferentialEvolution::DifferentialEvolution()
 EC::DifferentialEvolution::~DifferentialEvolution()
 { }
 
-
-/// \brief       A pure virtual method for initializing the population randomly.
+/// \brief       Create and initialize a population randomly. Overridden.
 ///				 WARNING: MUST BE CALLED BY OVERRIDDEN FUNCTION.
 /// \param[in]   populationSize. Size of a population.
 /// \param[in]   lowerBound. Domain lower bound.
 /// \param[in]   upperBound. Domain upper bound.
-void EC::DifferentialEvolution::Initialize(unsigned int populationSize, std::vector<double>& lowerBound,
-	std::vector<double>& upperBound, BaseFitnessFunctor<double, double>* pFitnessFunc)
+/// \param[in]   pFitnessFunc. Functor for fitness evaluation.
+void EC::DifferentialEvolution::Initialize(
+	unsigned int populationSize,
+	std::vector<double>& lowerBound,
+	std::vector<double>& upperBound,
+	BaseFitnessFunctor<double, double>* pFitnessFunc)
 {	
 	// Call base method to check the lower and upper bound
 	BaseEvolver<double, double>::Initialize(populationSize, lowerBound, upperBound, pFitnessFunc);
@@ -111,7 +114,7 @@ void EC::DifferentialEvolution::SaveElite()
 
 
 
-/// \brief Generate a few random integers without replacement
+// Generate a few random integers without replacement
 int* EC::DifferentialEvolution::RandIntegerWithoutReplacement(
 	unsigned int min,
 	unsigned int max,
