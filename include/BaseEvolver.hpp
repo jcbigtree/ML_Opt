@@ -65,8 +65,12 @@ namespace EC
 
 	protected:
 		/// \brief         Evaluate the current population.
+		/// \param[in,out] An individual
+		virtual void Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv);
+
+		/// \brief         Evaluate the current population.
 		/// \param[in,out] A population
-		virtual void Evaluate(BasePopulation<ChromoType, FitnessType>& population);
+		virtual void Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation);
 
 		/// \brief       Select the better ones from the current population.
 		virtual void Select() = 0;
@@ -183,27 +187,36 @@ namespace EC
 		m_upperBound = upperBound;
 		m_pFitnessFunc = pFitnessFunc;		
 	}
+	
 
 	template<typename ChromoType, typename FitnessType>
-	void BaseEvolver<ChromoType, FitnessType>::Evaluate(BasePopulation<ChromoType, FitnessType>& population)
+	void BaseEvolver<ChromoType, FitnessType>::Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv)
 	{
 		// Check whether we have fitness function
 		if (m_pFitnessFunc == NULL)
 		{
 			throw std::invalid_argument("Invalid fitness function");
 		}
-		unsigned int popSize = population.Size();
+		double fitness = (*m_pFitnessFunc)(pIndiv);
+		pIndiv->SetFitness(fitness);
+	}
+
+	template<typename ChromoType, typename FitnessType>
+	void BaseEvolver<ChromoType, FitnessType>::Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation)
+	{
+		// Check whether we have fitness function
+		unsigned int popSize = pPopulation->Size();
 		for (unsigned int i = 0; i < popSize; i++)
 		{
-			double fitness = (*m_pFitnessFunc)(population[i]);
-			population[i]->SetFitness(fitness);
+			Evaluate((*pPopulation)[i]);
 		}
 	}
 
 	template<typename ChromoType, typename FitnessType>
 	void BaseEvolver<ChromoType, FitnessType>::Evolve(int maxGeneration, bool verbose)
 	{
-		Evaluate(*m_pPopulation);
+		m_maxGeneration = maxGeneration;
+		Evaluate(m_pPopulation);
 		while(CheckStopCriteria() == false)
 		{
 			if (verbose){ std::cout << "Generation: " << m_generation << std::endl;	}			
