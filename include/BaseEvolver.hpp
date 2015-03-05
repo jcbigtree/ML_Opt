@@ -64,11 +64,11 @@ namespace EC
 		BasePopulation<ChromoType, FitnessType>* GetPopulation();
 
 	protected:
-		/// \brief         Evaluate the current population.
+		/// \brief         Evaluate a population.
 		/// \param[in,out] An individual
 		virtual void Evaluate(BaseIndividual<ChromoType, FitnessType>* pIndiv);
 
-		/// \brief         Evaluate the current population.
+		/// \brief         Evaluate an individual.
 		/// \param[in,out] A population
 		virtual void Evaluate(BasePopulation<ChromoType, FitnessType>* pPopulation);
 
