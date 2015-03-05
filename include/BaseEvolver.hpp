@@ -47,11 +47,12 @@ namespace EC
 		virtual void Evolve(unsigned int maxGeneration=100, bool verbose=false);
 
 		/// \brief Evolve. The main loop
-		/// \param[in] maxGeneration. Max generation allowed
+		/// \param[in] populationSize. Desired population size
 		/// \param[in] lowerBound. Domain lower bound
 		/// \param[in] upperBound. Domain upper bound
 		/// \param[in] pFitnessFunc. Functor for fitness evaluation
-		/// \param[in] verbose. If true, show details during evolving
+		/// \param[in] maxGeneration. Max generation allowed. default 100
+		/// \param[in] verbose. If true, show details during evolving. default false
 		virtual void Evolve(
 			unsigned int populationSize,
 			std::vector<double>& lowerBound,
