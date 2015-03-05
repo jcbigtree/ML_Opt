@@ -12,13 +12,16 @@ int main(void)
 {
 	SphereFunctor* pSphereFunc = new SphereFunctor();
 	DifferentialEvolution myDE;
+	unsigned int populationSize = 100;
+	unsigned int maxGeneration = 500;
+	bool verbose = true;
 	myDE.Evolve(
-		100,
+		populationSize,
 		pSphereFunc->GetDomainLowerBound(),
 		pSphereFunc->GetDomainUpperBound(),
 		pSphereFunc,
-		500,
-		true
+		maxGeneration,
+		verbose
 		);
 
 	RealCodedIndividual* pIndivElite = dynamic_cast<RealCodedIndividual*>(myDE.GetElite());
