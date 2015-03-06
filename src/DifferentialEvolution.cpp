@@ -7,7 +7,7 @@
 
 
 EC::DifferentialEvolution::DifferentialEvolution() 
-	: m_pElite(NULL), m_diffWeight(0.7), m_crossoverProb(0.8)
+	: m_pElite(NULL), m_diffWeight(0.7), m_crossoverProb(0.2)
 { }
 
 
@@ -66,21 +66,25 @@ void EC::DifferentialEvolution::Breed()
 		throw std::runtime_error("Empty population. Can't do breeding");
 	}
 
-	// Crossover 
+	// Mutation, Crossover and Select
 	unsigned int popSize = m_pPopulation->Size();
 	unsigned int indivLength = (*m_pPopulation)[0]->Size();
 
 	for (unsigned int i = 0; i < popSize; i++)
 	{
-		int* trialIndexes = RandIntegerWithoutReplacement(0, popSize, 3);
-		BaseIndividual<double, double>* x0 = (*m_pPopulation)[trialIndexes[0]];
-		BaseIndividual<double, double>* x1 = (*m_pPopulation)[trialIndexes[1]];
-		BaseIndividual<double, double>* x2 = (*m_pPopulation)[trialIndexes[2]];
-		BaseIndividual<double, double>* trial = new RealCodedIndividual(indivLength);
+		int* pTrialIndexes = RandIntegerWithoutReplacement(0, popSize, 3);
+		BaseIndividual<double, double>* x0 = (*m_pPopulation)[pTrialIndexes[0]];
+		BaseIndividual<double, double>* x1 = (*m_pPopulation)[pTrialIndexes[1]];
+		BaseIndividual<double, double>* x2 = (*m_pPopulation)[pTrialIndexes[2]];
+		BaseIndividual<double, double>* trial = (*m_pPopulation)[i]->DeepCopy();
 
+		int* pRandIndex = RandIntegerWithoutReplacement(0, indivLength, 1);
 		for (unsigned int j = 0; j < indivLength; j++)
 		{
-			(*trial)[j] = (*x0)[j] + m_diffWeight * ((*x1)[j] - (*x2)[j]);
+			if(j == pRandIndex[0] || RandUniform(0.0, 1.0) < m_crossoverProb)
+			{
+				(*trial)[j] = (*x0)[j] + m_diffWeight * ((*x1)[j] - (*x2)[j]);
+			}
 		}
 		// Evaluate new trial and compare it with the current one
 		Evaluate(trial);
@@ -109,7 +113,7 @@ void EC::DifferentialEvolution::SaveElite()
 	}
 	m_pElite = (*m_pPopulation)[minIndex];
 
-	std::cout << minValue << std::endl;
+	std::cout << m_pElite->GetFitness() << std::endl;
 }
 
 

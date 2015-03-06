@@ -33,7 +33,6 @@ int main(void)
 	std::cout << "Best fitness: " << pIndivElite->GetFitness() << std::endl;
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 
-	std::cin.get();
 	return 0;
 }
 
