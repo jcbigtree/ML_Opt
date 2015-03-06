@@ -8,7 +8,11 @@
 
 namespace EC
 {
-	/// \brief Differential evolution which is a kind of evolution algorithms.
+	/// \brief Differential evolution is a kind of evolutionary algorithm for black-box
+	///        optimization. DE is fast and robust.
+	///
+	///  Storn, R. and Price, K. "Differential Evolution: A Simple and Efficient Adaptive Scheme
+    ///  for Global Optimization over Continuous Spaces." J. Global Optimization 11, 341-359, 1997.
 	class DifferentialEvolution : public BaseEvolver<double, double>
 	{
 	public:
