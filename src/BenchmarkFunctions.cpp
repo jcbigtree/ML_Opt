@@ -16,18 +16,23 @@ EC::SphereFunctor::~SphereFunctor()
 { }
 
 
-/// \brief     Calculate fitness of an individual. For single-objective optimization only.
-/// \param[in] BaseIndividual<ChromoType, FitnessType>&. A reference to an individual
+/// \brief Calculate fitness of an individual. For single-objective optimization only.
+/// \param[in] pIndividual. A reference to an individual
 double EC::SphereFunctor::operator() (BaseIndividual<double, double>* pIndividual)
 {
-	double sum = 0;
+	if (pIndividual == NULL)
+	{
+		throw std::invalid_argument("Null pointer");	
+	}
+	
 	if (pIndividual->Size() != m_problemDim)
 	{
 		throw std::invalid_argument(
 			"The length of the individual should be equal to the problem dimension."
 			);
 	}
-
+	
+	double sum = 0;
 	for (unsigned int i = 0; i < m_problemDim; i++)
 	{
 		double val = (*pIndividual)[i];
