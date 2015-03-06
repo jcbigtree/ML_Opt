@@ -81,7 +81,7 @@ void EC::DifferentialEvolution::Breed()
 		int* pRandIndex = RandIntegerWithoutReplacement(0, indivLength, 1);
 		for (unsigned int j = 0; j < indivLength; j++)
 		{
-			if(j == pRandIndex[0] || RandUniform(0.0, 1.0) < m_crossoverProb)
+			if(j == (unsigned int)pRandIndex[0] || RandUniform(0.0, 1.0) < m_crossoverProb)
 			{
 				(*trial)[j] = (*x0)[j] + m_diffWeight * ((*x1)[j] - (*x2)[j]);
 			}
