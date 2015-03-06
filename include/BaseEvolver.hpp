@@ -93,13 +93,13 @@ namespace EC
 		/// \brief       Generate a number from a given uniform distribution [min, max]
 		/// \param[in]   min. Lower bound of a uniform distribution
 		/// \param[in]   max. Upper bound of a uniform distribution
-		/// \return      The generated number
+		/// \return      Random number
 		double RandUniform(const double min, const double max);
 
 		/// \brief       Generate a number from a given normal distribution (mean, std)
 		/// \param[in]   mean. Mean of a normal distribution
 		/// \param[in]   std. Std of a normal distribution
-		/// \return      The generated number
+		/// \return      Random number
 		double RandNorm(const double mean, const double std);
 
 	protected:		
