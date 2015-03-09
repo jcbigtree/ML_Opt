@@ -102,29 +102,29 @@ private:
 class OutputToFile 
 {
 public:
-	inline static FILE* GetStream()
+    inline static FILE* GetStream()
     {		
-		return m_pStream;
+	return m_pStream;
     }
 
-	inline static void SetStream(FILE* pStream)
-	{
-		m_pStream = pStream;
-	}
+    inline static void SetStream(FILE* pStream)
+    {
+	m_pStream = pStream;
+    }
 
-	/// \brief Output a message string to the stream
-	/// \param[in] message. std::string&.
+    /// \brief Output a message string to the stream
+    /// \param[in] message. std::string&.
     inline static void Output(const std::string& msg)
-	{
-		if(!m_pStream)
-		{ 
-			m_pStream = stdout; 
-		}
-		fprintf(m_pStream, "%s", msg.c_str());
-	    fflush(m_pStream);
+    {
+	if(!m_pStream)
+	{ 
+		m_pStream = stdout; 
 	}
+	fprintf(m_pStream, "%s", msg.c_str());
+        fflush(m_pStream);
+    }
 private:
-	static FILE* m_pStream;
+    static FILE* m_pStream;
 };
 
 
@@ -136,38 +136,38 @@ template<typename OutputPolicy>
 class Logger
 {
 public:
-	/// \brief Constructor 
-	Logger();
+    /// \brief Constructor 
+    Logger();
 
-	/// \brief Destructor 
+    /// \brief Destructor 
     virtual ~Logger();
 
-	/// \brief Return a std::ostringstream
-	/// \param[in] Desired log level
-	/// \return std::ostringstream
+    /// \brief Return a std::ostringstream
+    /// \param[in] Desired log level
+    /// \return std::ostringstream
     std::ostringstream& Get(LogLevel level = LOG_INFO);	
 
-	/// \brief Report the current level.
-	/// \return The current level
-	inline static LogLevel& ReportingLevel(){ return m_reportingLevel; }
+    /// \brief Report the current level.
+    /// \return The current level
+    inline static LogLevel& ReportingLevel(){ return m_reportingLevel; }
 	
-	/// \brief Get the timer
-	/// \return Timer
-	inline static Timer& GetTimer(){ return m_timer; }
+    /// \brief Get the timer
+    /// \return Timer
+    inline static Timer& GetTimer(){ return m_timer; }
 
 protected:
 	/// \brief std::ostringstream
     std::ostringstream os;
 
 private:
-	Logger(const Logger&){}
-	Logger& operator =(const Logger&){}
-	static const string GetCurrentTime();
+    Logger(const Logger&){}
+    Logger& operator =(const Logger&){}
+    static const string GetCurrentTime();
 
 private:
-	static Timer    m_timer;
+    static Timer    m_timer;
     static LogLevel m_reportingLevel;
-	static string   m_logLevelName[]; 
+    static string   m_logLevelName[]; 
 };
 
 
@@ -213,7 +213,7 @@ Logger<OutputPolicy>::Logger(){ }
 template<typename OutputPolicy>
 Logger<OutputPolicy>::~Logger()
 {
-	OutputPolicy::Output(os.str());
+    OutputPolicy::Output(os.str());
 }
 
 /// WARNING!!! Not thread-safe. 
@@ -224,14 +224,14 @@ const std::string Logger<OutputPolicy>::GetCurrentTime()
     struct tm  ts;
     char buf[80];
     ts = *localtime(&now);    
-	strftime(buf, sizeof(buf), "%d/%m/%y %X", &ts);
+    strftime(buf, sizeof(buf), "%d/%m/%y %X", &ts);
     return buf;
 }
 
 template<typename OutputPolicy>
 std::ostringstream& Logger<OutputPolicy>::Get(LogLevel level)
 {
-	os << ""  << GetCurrentTime();
+    os << ""  << GetCurrentTime();
     os << " " << m_logLevelName[level] << " ";
     //os << std::string(level > eLogDEBUG ? 0 : level - eLogDEBUG);
     return os;
