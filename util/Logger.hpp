@@ -156,7 +156,6 @@ public:
     	inline static Timer& GetTimer(){ return m_timer; }
 
 protected:
-	/// \brief std::ostringstream
     	std::ostringstream os;
 
 private:
