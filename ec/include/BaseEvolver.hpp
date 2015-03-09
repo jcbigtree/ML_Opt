@@ -114,6 +114,8 @@ namespace EC
 
 		BaseFitnessFunctor<ChromoType, FitnessType>* m_pFitnessFunc;
 
+		bool m_verbose;
+
 	private:
 		// Random number generator
 		std::random_device          m_randDevice;
@@ -126,7 +128,7 @@ namespace EC
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	template<typename ChromoType, typename FitnessType>
 	BaseEvolver<ChromoType, FitnessType>::BaseEvolver()
-		:m_pPopulation(NULL), m_generation(0), m_maxGeneration(100), m_pFitnessFunc(NULL)
+		:m_pPopulation(NULL), m_generation(0), m_maxGeneration(100), m_pFitnessFunc(NULL), m_verbose(false)
 	{
 		m_RandNumberGenerator = std::default_random_engine(m_randDevice()); 
 	}
@@ -224,6 +226,7 @@ namespace EC
 	template<typename ChromoType, typename FitnessType>
 	void BaseEvolver<ChromoType, FitnessType>::Evolve(unsigned int maxGeneration, bool verbose)
 	{
+		m_verbose = verbose;
 		m_maxGeneration = maxGeneration;
 		Evaluate(m_pPopulation);
 		while(CheckStopCriteria() == false)
