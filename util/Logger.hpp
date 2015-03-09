@@ -18,17 +18,15 @@
 * 
 *        In your files:
 *
-*		 returnValue YourFunc(inputValue)
-*		 {
-*			 FuncTraceBeginM(LOG_VERBOSE, "");
-*            //
-*            // Do something
-*            // 
-*            FuncTraceEndM(LOG_VERBOSE, "");
-*        }
+*            returnValue YourFunc(inputValue)
+*	     {
+*	         FuncTraceBeginM(LOG_VERBOSE, "");                       
+*                // Do something             
+*                FuncTraceEndM(LOG_VERBOSE, "");
+*            }
 *
 *        Typical Output:
-*		     : dd/mm/yy hh:mm:ss DEBUG YourFunc() Begin
+*            : dd/mm/yy hh:mm:ss DEBUG YourFunc() Begin
 *            : dd/mm/yy hh:mm:ss DEBUG YourFunc(), Elapsed time: xx seconds
 *            : dd/mm/yy hh:mm:ss DEBUG YourFunc() End
 *
