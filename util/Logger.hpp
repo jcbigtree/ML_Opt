@@ -60,11 +60,11 @@ using namespace std;
 /// \brief Log levels. There are five basic levels: ERROR, WARNING, INFO, DEBUG, VERBOSE. 
 enum LogLevel 
 {
-	LOG_ERROR   = 0,  /// Indicates logs for an error. 
-	LOG_WARNING = 1,  /// Indicates logs for a warning. 
-	LOG_INFO    = 2,  /// Indicates logs for an information message. 
-	LOG_DEBUG   = 3,  /// Indicates logs for debugging. 
-	LOG_VERBOSE = 4   /// Indicates logs at all levels.
+	LOG_ERROR   = 0,  // Errors
+	LOG_WARNING = 1,  // Warings
+	LOG_INFO    = 2,  // Useful info
+	LOG_DEBUG   = 3,  // Debug info
+	LOG_VERBOSE = 4   // Everything
 };
 
 
