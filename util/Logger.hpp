@@ -6,15 +6,15 @@
 * USAGE:
 *        In Logger.hpp:
 * 
-*        // Enable the following line if logging into file is desired.
-*        //#define FILE_LOG_TO_FILE
+*            // Enable the following line if logging into file is desired.
+*            //#define FILE_LOG_TO_FILE
 *
-*        // Logging levels
-*        //#define FILE_LOG_ERROR
-*        //#define FILE_LOG_WARNING
-*        //#define FILE_LOG_INFO
-*        #define FILE_LOG_DEBUG
-*        //#define FILE_LOG_VERBOSE
+*            // Logging levels
+*            //#define FILE_LOG_ERROR
+*            //#define FILE_LOG_WARNING
+*            //#define FILE_LOG_INFO
+*            #define FILE_LOG_DEBUG
+*            //#define FILE_LOG_VERBOSE
 * 
 *        In your files:
 *
