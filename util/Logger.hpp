@@ -232,7 +232,6 @@ std::ostringstream& Logger<OutputPolicy>::Get(LogLevel level)
 {
     os << ""  << GetCurrentTime();
     os << " " << m_logLevelName[level] << " ";
-    //os << std::string(level > eLogDEBUG ? 0 : level - eLogDEBUG);
     return os;
 }
 
